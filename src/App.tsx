@@ -1,32 +1,27 @@
-import React, { useEffect } from 'react';
-import styled from 'styled-components';
-import { Button } from '@react95/core';
-import { useClippy } from '@react95/clippy';
+import styled from "styled-components";
 
-import logo from './windows95_logo.png';
+import { Route, Routes, useLocation } from "react-router";
+import Input from "antd/lib/input/Input";
 
-const Centered = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
+const Content = styled.h1`
+  color: white;
+  font-size: 40px;
 `;
 
 function App() {
-  const { clippy } = useClippy();
-
-  useEffect(() => {
-    if (clippy) {
-      clippy.play('GetAttention');
-    }
-  }, [clippy]);
-
   return (
-    <Centered>
-      <img src={logo} alt="Windows 95 logo" style={{ width: 200 }} />
-      <Button>Start</Button>
-    </Centered>
+    <Routes>
+      <Route path="*" element={<Clippy></Clippy>}></Route>
+    </Routes>
+  );
+}
+function Clippy() {
+  const location = useLocation();
+  return (
+    <div>
+      <Content>{location.pathname}</Content>
+      <Input></Input>
+    </div>
   );
 }
 
